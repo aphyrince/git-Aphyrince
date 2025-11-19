@@ -9,25 +9,13 @@
     align-items: center;
 }
 
-/* .right > .setting-btn {
-    background-color: black;
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 36px;
-    height: 36px;
-} */
-
 .option button {
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 4px;
     border: 2px solid rgba(0, 0, 0, 0.37);
-    background-color: rgba(0, 0, 0, 0.075);
+    background-color: rgb(255, 255, 255);
 
     transition: 0.3s ease;
 
