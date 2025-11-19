@@ -1,0 +1,43 @@
+.cmd-list {
+    height: 92vh;
+}
+
+.cmd-list > ul {
+    height: 84vh;
+    padding: 5px;
+    overflow-y: auto;
+}
+
+.cmd-controls {
+    border-top: 2px solid rgba(0, 0, 0, 0.336);
+    width: 100%;
+    height: 8vh;
+    justify-items: end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cmd-controls > .text {
+    width: 80%;
+    padding: 5px;
+    font-size: 28px;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.322);
+
+    &:focus {
+        border: 3px solid rgba(0, 0, 0, 0.692);
+    }
+}
+
+.cmd-controls > .add {
+    border: none;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+
+    &:hover {
+        filter: contrast(80%);
+    }
+}
