@@ -1,12 +1,18 @@
 import "./App.css";
-
+import CmdList from "./components/cmd-list/CmdList";
+import Dialog from "./components/dialog/Dialog";
+import History from "./components/history/History";
+import Option from "./components/option/Option";
+import "./shared.css";
 const App = () => {
     return (
         <div className="app-container">
-            <div className="option">option</div>
-            <div className="section cmd-list">CMDLIST</div>
-            <div className="section history">history</div>
-            <div className="section dialog">dialog</div>
+            <Option />
+            <div className="content">
+                <CmdList />
+                <Dialog />
+                <History />
+            </div>
         </div>
     );
 };

@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body,
+#root {
+    width: 100vw;
+    height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.option {
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.151);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.content {
+    flex: 1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 250px 2fr 1.5fr;
+}
+.section {
+    height: 100%;
+    border-left: 2px solid rgba(0, 0, 0, 0.274);
+    &:first-child {
+        border: none;
+    }
+}
