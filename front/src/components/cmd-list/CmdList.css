@@ -32,9 +32,6 @@
 
 .cmd-controls > .add {
     border: none;
-    width: fit-content;
-    height: fit-content;
-    cursor: pointer;
     transition: filter 0.3s ease;
 
     &:hover {

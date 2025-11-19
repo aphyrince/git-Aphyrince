@@ -14,7 +14,7 @@
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.171);
-        cursor: pointer;
+        /* cursor: pointer; */
     }
 }
 
@@ -31,6 +31,7 @@
     color: white;
     font-size: 28px;
     transition: 0.3s ease;
+    cursor: pointer;
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.575);
