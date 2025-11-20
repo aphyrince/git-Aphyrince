@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface Cmd {
+export interface Cmd {
     text: string;
     key: string;
 }
