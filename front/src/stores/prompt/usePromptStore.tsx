@@ -1,7 +1,26 @@
-import React from "react";
+import { create } from "zustand";
 
-const usePromptStore = () => {
-    return <div></div>;
-};
+interface PromptLine {
+    type: "result" | "cmd";
+    text: string;
+    key: string;
+}
+
+interface PromptLineState {
+    list: PromptLine[];
+    addLine: ({ text, type }: { text: string; type: "result" | "cmd" }) => void;
+    clearLine: () => void;
+}
+
+const usePromptStore = create<PromptLineState>((set) => ({
+    list: [],
+    addLine: ({ text, type }: { text: string; type: "result" | "cmd" }) => {
+        const newLine = { text, type, key: Date() };
+        set((state) => ({ list: [...state.list, newLine] }));
+    },
+    clearLine: () => {
+        set((state) => ({ list: [] }));
+    },
+}));
 
 export default usePromptStore;
