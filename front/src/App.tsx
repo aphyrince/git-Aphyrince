@@ -3,7 +3,7 @@ import CmdList from "./components/cmd-list/CmdList";
 import Prompt from "./components/prompt/Prompt";
 import History from "./components/history/History";
 import Option from "./components/option/Option";
-import "./shared.css";
+
 const App = () => {
     return (
         <div className="app-container">
