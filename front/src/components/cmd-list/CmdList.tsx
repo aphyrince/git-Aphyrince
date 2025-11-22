@@ -24,6 +24,7 @@ const CmdList = () => {
     );
 
     const handleSubmit = useCallback(() => {
+        if (input === "") return;
         addCmd(input);
         setInput("");
     }, [addCmd, input]);
