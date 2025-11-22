@@ -7,6 +7,8 @@
 .option-section {
     display: flex;
     align-items: center;
+    height: 100%;
+    gap: 10px;
 }
 
 .option button {
@@ -21,5 +23,36 @@
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.219);
+    }
+}
+
+.repo-list {
+    display: flex;
+    align-items: end;
+    width: fit-content;
+    height: 100%;
+}
+
+.repo-item {
+    width: 100px;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid rgba(0, 0, 0, 0.466);
+    border-top: 2px solid rgba(0, 0, 0, 0.466);
+    &:first-of-type {
+        border-left: 2px solid rgba(0, 0, 0, 0.466);
+    }
+
+    &.opened {
+        background-color: white;
+        &:hover {
+            background-color: white;
+        }
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.164);
     }
 }

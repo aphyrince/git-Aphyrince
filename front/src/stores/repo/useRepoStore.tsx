@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface Repo {
+export interface Repo {
     name: string;
     path: string;
     key: string;
@@ -8,30 +8,45 @@ interface Repo {
 
 interface RepoState {
     currentRepo: Repo | null;
-    list: Repo[];
+    repoList: Repo[];
     addRepo: (repo: Repo) => void;
     updateRepo: (repo: Repo) => void;
     deleteRepo: (key: string) => void;
+    setCurrentRepo: (repo: Repo) => void;
 }
+
+const dummyRepoList = [
+    { name: "repo1", path: "github.com/repo1", key: "23132131" },
+    { name: "repo2", path: "github.com/repo2", key: "2313213213" },
+    { name: "repo3", path: "github.com/repo3", key: "23132144454" },
+];
 
 const useRepoStore = create<RepoState>()((set) => ({
     currentRepo: null,
-    list: [],
+    repoList: dummyRepoList,
 
     addRepo: (repo) => {
         repo.key = Date();
-        set((state) => ({ list: [...state.list, repo] }));
+        set((state) => ({ repoList: [...state.repoList, repo] }));
     },
 
     updateRepo: (repo) =>
         set((state) => ({
-            list: state.list.map((r) => (r.key === repo.key ? repo : r)),
+            repoList: state.repoList.map((r) =>
+                r.key === repo.key ? repo : r
+            ),
         })),
 
     deleteRepo: (key) =>
         set((state) => ({
-            list: state.list.filter((r) => r.key !== key),
+            repoList: state.repoList.filter((r) => r.key !== key),
         })),
+
+    setCurrentRepo: (repo: Repo) => {
+        set((state) => ({
+            currentRepo: repo,
+        }));
+    },
 }));
 
 export default useRepoStore;
