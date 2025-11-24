@@ -1,6 +1,8 @@
 import useRepoStore, { Repo } from "../../stores/repo/useRepoStore";
 import "./Option.css";
 import { BiSolidBrightness, BiSolidFilePlus } from "react-icons/bi";
+import RepoModal from "./repoModal/RepoModal";
+import { useState } from "react";
 
 const Option = () => {
     const {
@@ -11,6 +13,17 @@ const Option = () => {
         deleteRepo,
         setCurrentRepo,
     } = useRepoStore();
+
+    const [isRepoModal, setIsRepoModal] = useState(false);
+
+    const handleOpenRepoModal = () => {
+        console.log("open!");
+        setIsRepoModal(true);
+    };
+
+    const handleExitRepoModal = () => {
+        setIsRepoModal(false);
+    };
 
     const handleRepoClick = (repo: Repo) => {
         setCurrentRepo(repo);
@@ -31,7 +44,11 @@ const Option = () => {
                         </div>
                     ))}
                 </div>
-                <button className="repo-add-btn" title="add repository">
+                <button
+                    className="repo-add-btn"
+                    title="add repository"
+                    onClick={handleOpenRepoModal}
+                >
                     <BiSolidFilePlus size={40} />
                 </button>
             </div>
@@ -40,6 +57,7 @@ const Option = () => {
                     <BiSolidBrightness size={40} />
                 </button>
             </div>
+            {isRepoModal && <RepoModal onExit={handleExitRepoModal} />}
         </div>
     );
 };
