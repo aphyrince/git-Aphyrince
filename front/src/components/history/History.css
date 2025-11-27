@@ -46,3 +46,8 @@
         overflow: hidden;
     }
 }
+
+.history-item {
+    height: 28px;
+    overflow: hidden;
+}

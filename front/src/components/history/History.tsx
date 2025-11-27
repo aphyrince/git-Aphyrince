@@ -1,5 +1,7 @@
+import useHistoryStore from "../../stores/history/useHistoryStore";
 import "./History.css";
 const History = () => {
+    const list = useHistoryStore((state) => state.list);
     return (
         <div className="section history">
             <header>header</header>
@@ -12,20 +14,15 @@ const History = () => {
                     <p>commit</p>
                 </div>
                 <ul className="history-list">
-                    <li className="history-grid history-item">
-                        <p>graph</p>
-                        <p>comment</p>
-                        <p>date</p>
-                        <p>author</p>
-                        <p>commit</p>
-                    </li>
-                    <li className="history-grid history-item">
-                        <p>graph</p>
-                        <p>comment</p>
-                        <p>date</p>
-                        <p>author</p>
-                        <p>commit</p>
-                    </li>
+                    {list.map((line) => (
+                        <li className="history-grid history-item">
+                            <p>{line.graph}</p>
+                            <p>{line.comment}</p>
+                            <p>{line.date}</p>
+                            <p>{line.author}</p>
+                            <p>{line.commit}</p>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>
