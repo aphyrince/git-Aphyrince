@@ -20,7 +20,7 @@ const CmdList = () => {
         (e: React.KeyboardEvent) => {
             if (e.key === "Enter") handleSubmit();
         },
-        [, input]
+        [input]
     );
 
     const handleSubmit = useCallback(() => {

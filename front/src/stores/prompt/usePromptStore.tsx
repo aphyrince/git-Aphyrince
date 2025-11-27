@@ -19,7 +19,7 @@ const usePromptStore = create<PromptLineState>((set) => ({
         set((state) => ({ list: [...state.list, newLine] }));
     },
     clearLine: () => {
-        set((state) => ({ list: [] }));
+        set(() => ({ list: [] }));
     },
 }));
 
