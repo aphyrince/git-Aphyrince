@@ -3,6 +3,7 @@ import "./Option.css";
 import { BiSolidBrightness, BiSolidFilePlus } from "react-icons/bi";
 import RepoModal from "./repoModal/RepoModal";
 import { useState } from "react";
+import SettingModal from "./settingModal/SettingModal";
 
 const Option = () => {
     const {
@@ -15,9 +16,17 @@ const Option = () => {
     } = useRepoStore();
 
     const [isRepoModal, setIsRepoModal] = useState(false);
+    const [isSetting, setIsSetting] = useState(false);
+
+    const handleOpenSetting = () => {
+        setIsSetting(true);
+    };
+
+    const handleExitSetting = () => {
+        setIsSetting(false);
+    };
 
     const handleOpenRepoModal = () => {
-        console.log("open!");
         setIsRepoModal(true);
     };
 
@@ -53,11 +62,16 @@ const Option = () => {
                 </button>
             </div>
             <div className="option-section right">
-                <button className="setting-btn" title="setting">
+                <button
+                    className="setting-btn"
+                    title="setting"
+                    onClick={handleOpenSetting}
+                >
                     <BiSolidBrightness size={40} />
                 </button>
             </div>
             {isRepoModal && <RepoModal onExit={handleExitRepoModal} />}
+            {isSetting && <SettingModal onExit={handleExitSetting} />}
         </div>
     );
 };

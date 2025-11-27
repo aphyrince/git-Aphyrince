@@ -1,0 +1,42 @@
+.modal-setting {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.63);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setting-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 600px;
+    height: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    padding-bottom: 40px;
+
+    overflow: hidden;
+}
+
+.setting-header {
+    width: 100%;
+    height: 32px;
+    background-color: rgb(138, 138, 138);
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setting-content {
+    flex: 1;
+}
