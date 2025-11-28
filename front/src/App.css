@@ -60,6 +60,7 @@ body,
     background-color: var(--key-color);
     transition: all 0.2s ease;
     height: 100%;
+    margin-left: 2px;
 
     &:hover {
         filter: opacity(50%);
