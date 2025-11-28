@@ -6,6 +6,7 @@ import Option from "./components/option/Option";
 import { useEffect, useRef, useState } from "react";
 import useApplyTheme from "./hooks/useApplyTheme";
 import useThemeStore from "./stores/theme/useThemeStore";
+import useInitializeThemeFromCSS from "./hooks/useInitializeThemeFromCSS";
 
 const App = () => {
     const [cols, setCols] = useState([45, 34, 20]);
@@ -15,6 +16,7 @@ const App = () => {
 
     const setTheme = useThemeStore((s) => s.setTheme);
 
+    useInitializeThemeFromCSS();
     useApplyTheme();
 
     const onMouseDown = (index: number) => {

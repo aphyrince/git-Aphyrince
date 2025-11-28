@@ -12,7 +12,11 @@ interface ThemeStatus {
 }
 
 const useThemeStore = create<ThemeStatus>((set) => ({
-    currentTheme: { fontColor: "#000", bgColor: "#fff", keyColor: "#aaa" },
+    currentTheme: {
+        fontColor: "#000000",
+        bgColor: "#ffffff",
+        keyColor: "#aaaaaa",
+    },
     setTheme: (theme: Theme) => {
         set(() => ({ currentTheme: theme }));
     },

@@ -44,6 +44,7 @@ const Option = () => {
                 <div className="repo-list">
                     {repoList.map((repo) => (
                         <div
+                            key={repo.key}
                             className={`repo-item ${
                                 currentRepo?.key === repo.key ? "opened" : ""
                             }`}

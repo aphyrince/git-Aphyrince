@@ -14,6 +14,7 @@ const SettingModal = ({ onExit }: { onExit: () => void }) => {
         const { name, value } = e.target;
         const newTheme = { ...currentTheme, [name]: value };
         setTheme(newTheme);
+        console.log(value);
     };
 
     return (

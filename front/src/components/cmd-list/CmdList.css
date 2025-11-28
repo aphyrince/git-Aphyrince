@@ -1,5 +1,6 @@
 .cmd-list {
     height: 92vh;
+    color: var(--font-color);
 }
 
 .cmd-list > ul {
@@ -23,6 +24,7 @@
     border-radius: 8px;
     border: none;
     background-color: var(--key-color);
+    color: var(--font-color);
 
     &:focus {
         border: 3px solid var(--font-color);
