@@ -4,12 +4,18 @@ import Prompt from "./components/prompt/Prompt";
 import History from "./components/history/History";
 import Option from "./components/option/Option";
 import { useEffect, useRef, useState } from "react";
+import useApplyTheme from "./hooks/useApplyTheme";
+import useThemeStore from "./stores/theme/useThemeStore";
 
 const App = () => {
     const [cols, setCols] = useState([45, 34, 20]);
     const [isDragging, setIsDragging] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const dragging = useRef<number | null>(null);
+
+    const setTheme = useThemeStore((s) => s.setTheme);
+
+    useApplyTheme();
 
     const onMouseDown = (index: number) => {
         dragging.current = index;
@@ -52,13 +58,23 @@ const App = () => {
     };
 
     useEffect(() => {
+        const rootStyle = document.documentElement.style;
+
+        const fontColor = rootStyle.getPropertyValue("--font-color");
+        const bgColor = rootStyle.getPropertyValue("--bg-color");
+        const keyColor = rootStyle.getPropertyPriority("--key-color");
+
+        setTheme({ fontColor, bgColor, keyColor });
+    }, []);
+
+    useEffect(() => {
         document.addEventListener("mousemove", onMouseMove);
         document.addEventListener("mouseup", onMouseUp);
         return () => {
             document.removeEventListener("mousemove", onMouseMove);
             document.removeEventListener("mouseup", onMouseUp);
         };
-    });
+    }, []);
 
     return (
         <div className="app-container">
