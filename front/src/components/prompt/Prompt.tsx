@@ -36,7 +36,7 @@ const Prompt = () => {
                     ))}
                 </ul>
             </div>
-            <div className="input">
+            <div className="input flex-center">
                 <input
                     className="cmd"
                     type="text"
@@ -45,8 +45,12 @@ const Prompt = () => {
                     onKeyDown={handleEnterKey}
                     value={input}
                 />
-                <button className="enter" title="execute" onClick={handleExec}>
-                    <BsArrowRightSquareFill size={40} />
+                <button
+                    className="enter flex-center"
+                    title="execute"
+                    onClick={handleExec}
+                >
+                    <BsArrowRightSquareFill size={36} />
                 </button>
             </div>
         </div>

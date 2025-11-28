@@ -9,13 +9,10 @@
 }
 
 .cmd-controls {
-    border-top: 2px solid rgba(0, 0, 0, 0.336);
+    border-top: 2px solid var(--key-color);
     width: 100%;
     height: 8vh;
-    justify-items: end;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 5px;
 }
 
 .cmd-controls > .text {
@@ -23,18 +20,23 @@
     padding: 5px;
     font-size: 20px;
     border-radius: 8px;
-    border: 2px solid rgba(0, 0, 0, 0.322);
+    border: 2px solid var(--key-color);
 
     &:focus {
-        border: 3px solid rgba(0, 0, 0, 0.692);
+        border: 3px solid var(--font-color);
     }
 }
 
 .cmd-controls > .add {
     border: none;
+    background: none;
     transition: filter 0.3s ease;
+    color: var(--font-color);
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
 
     &:hover {
-        filter: contrast(80%);
+        filter: opacity(70%);
     }
 }

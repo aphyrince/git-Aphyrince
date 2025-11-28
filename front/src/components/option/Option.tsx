@@ -54,20 +54,20 @@ const Option = () => {
                     ))}
                 </div>
                 <button
-                    className="repo-add-btn"
+                    className="option-button "
                     title="add repository"
                     onClick={handleOpenRepoModal}
                 >
-                    <BiSolidFilePlus size={40} />
+                    <BiSolidFilePlus size={48} />
                 </button>
             </div>
             <div className="option-section right">
                 <button
-                    className="setting-btn"
+                    className="option-button"
                     title="setting"
                     onClick={handleOpenSetting}
                 >
-                    <BiSolidBrightness size={40} />
+                    <BiSolidBrightness size={48} />
                 </button>
             </div>
             {isRepoModal && <RepoModal onExit={handleExitRepoModal} />}

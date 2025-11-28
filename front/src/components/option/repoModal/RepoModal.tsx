@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import useRepoStore from "../../../stores/repo/useRepoStore";
 import "./RepoModal.css";
-import { BsPlusLg, BsXLg } from "react-icons/bs";
+import { BsPlusSquareFill, BsXSquareFill, BsXCircleFill } from "react-icons/bs";
 
 const RepoModal = ({ onExit }: { onExit: () => void }) => {
     const addRepo = useRepoStore((state) => state.addRepo);
@@ -36,7 +36,12 @@ const RepoModal = ({ onExit }: { onExit: () => void }) => {
                     e.stopPropagation();
                 }}
             >
-                <div className="modal-header">Add repository</div>
+                <div className="modal-header">
+                    <span>Add repository</span>
+                    <button className="option-button" onClick={handleExit}>
+                        <BsXCircleFill size={24} />
+                    </button>
+                </div>
                 <div className="input-container">
                     <div className="input-text">
                         <label>path</label>
@@ -58,11 +63,11 @@ const RepoModal = ({ onExit }: { onExit: () => void }) => {
                     </div>
                 </div>
                 <div className="btn-container">
-                    <button onClick={handleExit}>
-                        <BsXLg size={40} />
+                    <button onClick={handleExit} className="option-button">
+                        <BsXSquareFill size={40} />
                     </button>
-                    <button onClick={handleCreate}>
-                        <BsPlusLg size={40} />
+                    <button onClick={handleCreate} className="option-button">
+                        <BsPlusSquareFill size={40} />
                     </button>
                 </div>
             </div>

@@ -9,7 +9,7 @@
 }
 
 .prompt > .list > ul {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     font-size: large;
     height: 84vh;
     overflow-y: auto;
@@ -24,7 +24,7 @@
 }
 .prompt > .list > ul > li {
     width: 100%;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.151);
+    border-bottom: 2px solid var(--key-color);
     padding: 3px 0;
 }
 .prompt > .list > ul > .cmd {
@@ -32,31 +32,27 @@
     justify-content: end;
 
     & > p {
-        background-color: rgba(0, 0, 0, 0.171);
         padding: 4px;
         border-radius: 4px;
     }
 }
 
 .prompt > .input {
-    border-top: 2px solid rgba(0, 0, 0, 0.336);
+    border-top: 2px solid var(--key-color);
     width: 100%;
     height: 8vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 10px;
 }
 
 .prompt > .input > .cmd {
     width: 85%;
     padding: 5px;
-    font-size: 28px;
+    font-size: 24px;
     border-radius: 8px;
-    border: 2px solid rgba(0, 0, 0, 0.322);
+    border: 2px solid var(--key-color);
 
     &:focus {
-        border: 3px solid rgba(0, 0, 0, 0.692);
+        border: 3px solid var(--font-color);
     }
 }
 
@@ -64,10 +60,11 @@
     border: none;
     width: fit-content;
     height: fit-content;
-    /* cursor: pointer; */
-    transition: filter 0.3s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--font-color);
 
     &:hover {
-        filter: contrast(80%);
+        filter: opacity(70%);
     }
 }

@@ -1,20 +1,16 @@
 .cmd-elem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: large;
+    font-size: 20px;
     border-radius: 4px;
-    border: 2px solid rgba(0, 0, 0, 0.377);
-    background-color: white;
-    padding-left: 5px;
+    border: 2px solid var(--key-color);
+    padding-left: 4px;
     transition: 0.3s ease;
-
     margin-bottom: 5px;
+    color: var(--font-color);
 
     &:hover {
-        background-color: rgba(0, 0, 0, 0.171);
-        /* cursor: pointer; */
+        background-color: var(--key-color);
+        color: var(--bg-color);
+        cursor: pointer;
     }
 }
 
@@ -26,17 +22,13 @@
     margin-left: 4px;
     width: 20px;
     height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border: none;
     background: none;
     border-radius: 4px;
-    font-size: 28px;
     transition: 0.3s ease;
     cursor: pointer;
 
     &:hover {
-        background-color: rgba(0, 0, 0, 0.575);
+        color: var(--bg-color);
     }
 }

@@ -8,10 +8,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--font-color);
 }
 
 .setting-container {
-    background-color: white;
+    background-color: var(--bg-color);
     border-radius: 16px;
     width: 600px;
     height: 400px;
@@ -20,9 +21,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-
-    padding-bottom: 40px;
 
     overflow: hidden;
 }
@@ -30,8 +28,8 @@
 .setting-header {
     width: 100%;
     height: 32px;
-    background-color: rgb(138, 138, 138);
-    padding: 4px;
+    background-color: var(--key-color);
+    padding: 0px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,4 +37,17 @@
 
 .setting-content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 16px;
+    align-items: start;
+    width: 100%;
+    padding: 16px;
+    font-size: 24px;
+}
+
+.setting-color {
+    display: grid;
+    grid-template-columns: 150px 50px;
 }

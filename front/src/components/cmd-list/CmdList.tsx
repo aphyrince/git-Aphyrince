@@ -36,7 +36,7 @@ const CmdList = () => {
                     <CmdElem cmd={line} key={line.key} />
                 ))}
             </ul>
-            <div className="cmd-controls">
+            <div className="cmd-controls flex-center">
                 <input
                     className="text"
                     type="text"
@@ -46,11 +46,11 @@ const CmdList = () => {
                     onKeyDown={handleEnterKey}
                 />
                 <button
-                    className="add"
+                    className="add flex-center"
                     title="add new command"
                     onClick={handleSubmit}
                 >
-                    <BsFilePlusFill size={40} />
+                    <BsFilePlusFill size={36} />
                 </button>
             </div>
         </div>
