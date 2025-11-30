@@ -32,3 +32,5 @@ interface Theme {
     fontColor: string;
     bgColor: string;
 }
+
+export { Repository, PromptLine, History, Cmd, Theme };
