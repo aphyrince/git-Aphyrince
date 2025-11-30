@@ -33,4 +33,10 @@ interface Theme {
     bgColor: string;
 }
 
-export { Repository, PromptLine, History, Cmd, Theme };
+interface Data {
+    repos: Repository[];
+    cmds: Cmd[];
+    theme: Theme;
+}
+
+export { Repository, PromptLine, History, Cmd, Theme, Data };

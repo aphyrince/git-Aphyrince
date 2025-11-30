@@ -1,11 +1,5 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { Cmd, Repository, Theme } from "./types.d";
-
-interface Data {
-    repos: Repository[];
-    cmds: Cmd[];
-    theme: Theme;
-}
+import { Cmd, Data, Repository, Theme } from "./types.d";
 
 contextBridge.exposeInMainWorld("store", {
     dataLoad: (): Promise<Data> => {
@@ -16,7 +10,9 @@ contextBridge.exposeInMainWorld("store", {
         console.log("PRELOAD dataUpdate() CALLED.");
         return ipcRenderer.invoke("data-update", newData);
     },
-    commandExe: (command: string): Promise<string> => {
+    commandExe: (
+        command: string
+    ): Promise<{ success: boolean; output: string }> => {
         console.log("PRELOAD commandExe() CALLED.");
         return ipcRenderer.invoke("command-exe", command);
     },
