@@ -3,61 +3,19 @@ import CmdList from "./components/cmd-list/CmdList";
 import Prompt from "./components/prompt/Prompt";
 import History from "./components/history/History";
 import Option from "./components/option/Option";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import useApplyTheme from "./hooks/useApplyTheme";
 import useThemeStore from "./stores/theme/useThemeStore";
 import useInitializeThemeFromCSS from "./hooks/useInitializeThemeFromCSS";
+import useResizableLayout from "./hooks/useResizableLayout";
 
 const App = () => {
-    const [cols, setCols] = useState([45, 34, 20]);
-    const [isDragging, setIsDragging] = useState(false);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const dragging = useRef<number | null>(null);
+    const { isDragging, containerRef, cols, onMouse } = useResizableLayout();
 
     const setTheme = useThemeStore((s) => s.setTheme);
 
     useInitializeThemeFromCSS();
     useApplyTheme();
-
-    const onMouseDown = (index: number) => {
-        dragging.current = index;
-        setIsDragging(true);
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-        if (dragging.current === null || !containerRef.current) return;
-
-        const rect = containerRef.current.getBoundingClientRect();
-        const totalWidth = rect.width;
-        const x = e.clientX - rect.left;
-
-        let [c1, c2, c3] = cols;
-
-        const toPercent = (px: number) => (px / totalWidth) * 100;
-
-        if (dragging.current === 0) {
-            const leftPercent = toPercent(x);
-            const middlePercent = c1 + c2 - leftPercent;
-
-            if (leftPercent > 5 && middlePercent > 5) {
-                setCols([leftPercent, middlePercent, c3]);
-            }
-        }
-
-        if (dragging.current === 1) {
-            const middlePercent = toPercent(x) - c1;
-            const rightPercent = c2 + c3 - middlePercent;
-
-            if (middlePercent > 5 && rightPercent > 5) {
-                setCols([c1, middlePercent, rightPercent]);
-            }
-        }
-    };
-
-    const onMouseUp = () => {
-        dragging.current = null;
-        setIsDragging(false);
-    };
 
     useEffect(() => {
         const rootStyle = document.documentElement.style;
@@ -70,11 +28,11 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        document.addEventListener("mousemove", onMouseMove);
-        document.addEventListener("mouseup", onMouseUp);
+        document.addEventListener("mousemove", onMouse.move);
+        document.addEventListener("mouseup", onMouse.up);
         return () => {
-            document.removeEventListener("mousemove", onMouseMove);
-            document.removeEventListener("mouseup", onMouseUp);
+            document.removeEventListener("mousemove", onMouse.move);
+            document.removeEventListener("mouseup", onMouse.up);
         };
     }, []);
 
@@ -90,9 +48,9 @@ const App = () => {
                 }}
             >
                 <History />
-                <div className="handle" onMouseDown={() => onMouseDown(0)} />
+                <div className="handle" onMouseDown={() => onMouse.down(0)} />
                 <Prompt />
-                <div className="handle" onMouseDown={() => onMouseDown(1)} />
+                <div className="handle" onMouseDown={() => onMouse.down(1)} />
                 <CmdList />
             </div>
         </div>
