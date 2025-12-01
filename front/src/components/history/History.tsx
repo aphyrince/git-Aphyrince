@@ -1,39 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import useHistoryStore from "../../stores/history/useHistoryStore";
 import "./History.css";
+import useResizableLayout from "../../hooks/useResizableLayout";
 const History = () => {
     const list = useHistoryStore((state) => state.list);
 
-    const [cols, setCols] = useState([10, 43, 15, 15, 15]);
-    const dragging = useRef<number | null>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
+    const { containerRef, cols, onMouse } = useResizableLayout([
+        10, 43, 15, 15, 15,
+    ]);
 
     useEffect(() => {
-        const handleMove = (e: MouseEvent) => {
-            if (dragging.current === null || !containerRef.current) return;
-
-            const index = dragging.current;
-            const containerWidth = containerRef.current.offsetWidth;
-            const delta = (e.movementX / containerWidth) * 100;
-
-            setCols((prev) => {
-                const next = [...prev];
-                next[index] = Math.max(5, prev[index] + delta);
-                next[index + 1] = Math.max(5, prev[index + 1] - delta);
-                return next;
-            });
-        };
-
-        const stopDrag = () => {
-            dragging.current = null;
-        };
-
-        window.addEventListener("mousemove", handleMove);
-        window.addEventListener("mouseup", stopDrag);
-
+        document.addEventListener("mousemove", onMouse.move);
+        document.addEventListener("mouseup", onMouse.up);
         return () => {
-            window.removeEventListener("mousemove", handleMove);
-            window.removeEventListener("mouseup", stopDrag);
+            document.removeEventListener("mousemove", onMouse.move);
+            document.removeEventListener("mouseup", onMouse.up);
         };
     }, []);
 
@@ -59,9 +40,7 @@ const History = () => {
                                 {i < cols.length - 1 && (
                                     <div
                                         className="resize-handle"
-                                        onMouseDown={() =>
-                                            (dragging.current = i)
-                                        }
+                                        onMouseDown={() => onMouse.down(i)}
                                     />
                                 )}
                             </div>

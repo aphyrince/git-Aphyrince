@@ -10,7 +10,9 @@ import useInitializeThemeFromCSS from "./hooks/useInitializeThemeFromCSS";
 import useResizableLayout from "./hooks/useResizableLayout";
 
 const App = () => {
-    const { isDragging, containerRef, cols, onMouse } = useResizableLayout();
+    const { isDragging, containerRef, cols, onMouse } = useResizableLayout([
+        45, 30, 20,
+    ]);
 
     const setTheme = useThemeStore((s) => s.setTheme);
 
