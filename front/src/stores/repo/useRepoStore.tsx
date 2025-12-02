@@ -38,7 +38,7 @@ const useRepoStore = create<RepoState>()((set) => ({
         })),
 
     setCurrentRepo: (repo: Repo) => {
-        set((state) => ({
+        set(() => ({
             currentRepo: repo,
         }));
     },
