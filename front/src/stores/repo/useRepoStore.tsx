@@ -1,10 +1,5 @@
 import { create } from "zustand";
-
-export interface Repo {
-    name: string;
-    path: string;
-    key: string;
-}
+import { Repo } from "../../global";
 
 interface RepoState {
     currentRepo: Repo | null;

@@ -1,9 +1,10 @@
-import useRepoStore, { Repo } from "../../stores/repo/useRepoStore";
+import useRepoStore from "../../stores/repo/useRepoStore";
 import "./Option.css";
 import { BiSolidBrightness, BiSolidFilePlus } from "react-icons/bi";
 import RepoModal from "./repoModal/RepoModal";
 import { useState } from "react";
 import SettingModal from "./settingModal/SettingModal";
+import { Repo } from "../../global";
 
 const Option = () => {
     const {

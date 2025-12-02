@@ -11,13 +11,19 @@ import useResizableLayout from "./hooks/useResizableLayout";
 
 const App = () => {
     const { isDragging, containerRef, cols, onMouse } = useResizableLayout([
-        45, 30, 20,
+        45, 34, 20,
     ]);
-
     const setTheme = useThemeStore((s) => s.setTheme);
-
     useInitializeThemeFromCSS();
     useApplyTheme();
+
+    // useEffect(() => {
+    //     const load = async () => {
+    //         const data = await window.store.dataLoad();
+    //         return data;
+    //     };
+    //     console.log(load());
+    // }, []);
 
     useEffect(() => {
         const rootStyle = document.documentElement.style;
