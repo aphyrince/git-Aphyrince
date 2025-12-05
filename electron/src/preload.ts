@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { Cmd, Data, Repository, Theme } from "./types.d";
+import { Data } from "./types.d";
 
 contextBridge.exposeInMainWorld("store", {
     dataLoad: (): Promise<Data> => {

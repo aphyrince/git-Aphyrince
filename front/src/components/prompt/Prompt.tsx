@@ -2,11 +2,18 @@ import { ChangeEvent, useCallback, useState } from "react";
 import usePromptStore from "../../stores/prompt/usePromptStore";
 import "./Prompt.css";
 import { BsArrowRightSquareFill } from "react-icons/bs";
+import commandExe from "../../preloads/commandExe";
 
 const Prompt = () => {
     const list = usePromptStore((state) => state.list);
     const addLine = usePromptStore((state) => state.addLine);
     const [input, setInput] = useState("");
+    const [path, setPath] = useState("");
+
+    const commandExecute = useCallback(async (command: string) => {
+        const cmdResult = await commandExe(command);
+        addLine(cmdResult.output, "result");
+    }, []);
 
     const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
@@ -14,7 +21,8 @@ const Prompt = () => {
 
     const handleExec = useCallback(() => {
         if (input === "") return;
-        addLine({ type: "cmd", text: input });
+        addLine(input, "cmd");
+        commandExecute(input);
         setInput("");
     }, [input, addLine]);
 
