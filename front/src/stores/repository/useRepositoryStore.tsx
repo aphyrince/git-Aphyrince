@@ -11,7 +11,7 @@ interface RepositoryState {
     setList: (repoList: Repository[]) => void;
 }
 
-const useRepositoryState = create<RepositoryState>((set) => ({
+const useRepositoryStore = create<RepositoryState>((set) => ({
     currentRepo: null,
     list: [],
     add: (name: string, path: string) => {
@@ -42,4 +42,4 @@ const useRepositoryState = create<RepositoryState>((set) => ({
         }),
 }));
 
-export default useRepositoryState;
+export default useRepositoryStore;

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { Repository } from "../../global";
 
 interface HistoryItem {
     graph: string;
@@ -10,9 +11,12 @@ interface HistoryItem {
 }
 
 interface HistoryState {
+    currentRepo: Repository | null;
     list: HistoryItem[];
-    addHistory: (history: HistoryItem) => void;
-    updateHistory: (history: HistoryItem) => void;
+    add: (history: HistoryItem) => void;
+    update: (history: HistoryItem) => void;
+    setHistory: (newList: HistoryItem[]) => void;
+    setCurrentRepo: (repo: Repository) => void;
 }
 
 const dummyHistory = [
@@ -43,18 +47,24 @@ const dummyHistory = [
 ];
 
 const useHistoryStore = create<HistoryState>((set) => ({
-    // list: [],
+    currentRepo: null,
     list: dummyHistory,
-    addHistory: (history: HistoryItem) => {
+    add: (history: HistoryItem) => {
         history.key = Date();
         set((state) => ({ list: [...state.list, history] }));
     },
-    updateHistory: (history: HistoryItem) => {
+    update: (history: HistoryItem) => {
         set((state) => ({
             list: state.list.map((item) =>
                 item.key === history.key ? history : item
             ),
         }));
+    },
+    setHistory: (newList: HistoryItem[]) => {
+        set(() => ({ list: [...newList] }));
+    },
+    setCurrentRepo: (repo: Repository) => {
+        set(() => ({ currentRepo: repo }));
     },
 }));
 
