@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from "react";
-import useRepoStore from "../../../stores/repo/useRepoStore";
 import "./RepoModal.css";
 import { BsPlusSquareFill, BsXSquareFill, BsXCircleFill } from "react-icons/bs";
+import useRepositoryStore from "../../../stores/repository/useRepositoryStore";
 
 const RepoModal = ({ onExit }: { onExit: () => void }) => {
-    const addRepo = useRepoStore((state) => state.addRepo);
+    const addRepo = useRepositoryStore((s) => s.add);
+
     const [data, setData] = useState({ path: "", name: "" });
 
     const handleExit = () => {
@@ -14,8 +15,7 @@ const RepoModal = ({ onExit }: { onExit: () => void }) => {
 
     const handleCreate = () => {
         if (data.path === "" || data.name === "") return;
-        const newRepo = { ...data, key: Date() };
-        addRepo(newRepo);
+        addRepo(data.name, data.path);
         handleExit();
     };
 

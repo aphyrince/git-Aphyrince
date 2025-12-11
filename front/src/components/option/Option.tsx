@@ -1,31 +1,18 @@
-import useRepoStore from "../../stores/repo/useRepoStore";
 import "./Option.css";
 import { BiSolidBrightness, BiSolidFilePlus } from "react-icons/bi";
 import RepoModal from "./repoModal/RepoModal";
 import { useState } from "react";
 import SettingModal from "./settingModal/SettingModal";
-import { Repo } from "../../global";
+import useRepositoryClick from "../../hooks/useRepositoryClick";
+import useRepositoryStore from "../../stores/repository/useRepositoryStore";
 
 const Option = () => {
-    const {
-        currentRepo,
-        repoList,
-        addRepo,
-        updateRepo,
-        deleteRepo,
-        setCurrentRepo,
-    } = useRepoStore();
+    const currentRepo = useRepositoryStore((s) => s.currentRepo);
+    const repoList = useRepositoryStore((s) => s.list);
+    const { handleRepoClick, handleRepoRightClick } = useRepositoryClick();
 
     const [isRepoModal, setIsRepoModal] = useState(false);
     const [isSetting, setIsSetting] = useState(false);
-
-    const handleOpenSetting = () => {
-        setIsSetting(true);
-    };
-
-    const handleExitSetting = () => {
-        setIsSetting(false);
-    };
 
     const handleOpenRepoModal = () => {
         setIsRepoModal(true);
@@ -35,8 +22,12 @@ const Option = () => {
         setIsRepoModal(false);
     };
 
-    const handleRepoClick = (repo: Repo) => {
-        setCurrentRepo(repo);
+    const openSetting = () => {
+        setIsSetting(true);
+    };
+
+    const exitSetting = () => {
+        setIsSetting(false);
     };
 
     return (
@@ -67,13 +58,13 @@ const Option = () => {
                 <button
                     className="option-button"
                     title="setting"
-                    onClick={handleOpenSetting}
+                    onClick={openSetting}
                 >
                     <BiSolidBrightness size={48} />
                 </button>
             </div>
             {isRepoModal && <RepoModal onExit={handleExitRepoModal} />}
-            {isSetting && <SettingModal onExit={handleExitSetting} />}
+            {isSetting && <SettingModal onExit={exitSetting} />}
         </div>
     );
 };
