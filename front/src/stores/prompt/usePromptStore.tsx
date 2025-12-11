@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { Repository } from "../../global";
 
 interface PromptLine {
     type: "result" | "cmd";
@@ -7,20 +8,29 @@ interface PromptLine {
 }
 
 interface PromptLineState {
+    currentRepo: Repository | null;
     list: PromptLine[];
-    // addLine: ({ text, type }: { text: string; type: "result" | "cmd" }) => void;
-    addLine: (text: string, type: "result" | "cmd") => void;
-    clearLine: () => void;
+    add: (text: string, type: "result" | "cmd") => void;
+    clear: () => void;
+    setPrompt: (newList: PromptLine[]) => void;
+    setCurrentRepo: (repo: Repository) => void;
 }
 
 const usePromptStore = create<PromptLineState>((set) => ({
+    currentRepo: null,
     list: [],
-    addLine: (text: string, type: "result" | "cmd") => {
+    add: (text: string, type: "result" | "cmd") => {
         const newLine = { text, type, key: Date() };
         set((state) => ({ list: [...state.list, newLine] }));
     },
-    clearLine: () => {
+    clear: () => {
         set(() => ({ list: [] }));
+    },
+    setPrompt: (newList: PromptLine[]) => {
+        set(() => ({ list: [...newList] }));
+    },
+    setCurrentRepo: (repo: Repository) => {
+        set(() => ({ currentRepo: repo }));
     },
 }));
 

@@ -6,7 +6,7 @@ import commandExe from "../../preloads/commandExe";
 
 const Prompt = () => {
     const list = usePromptStore((state) => state.list);
-    const addLine = usePromptStore((state) => state.addLine);
+    const addLine = usePromptStore((state) => state.add);
     const [input, setInput] = useState("");
     const [path, setPath] = useState("");
 
