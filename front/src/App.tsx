@@ -20,13 +20,13 @@ const App = () => {
     useInitializeThemeFromCSS();
     useApplyTheme();
 
-    useEffect(() => {
-        const load = async () => {
-            const data = await dataLoad();
-            setList(data.repos);
-        };
-        load();
-    }, []);
+    // useEffect(() => {
+    //     const load = async () => {
+    //         const data = await dataLoad();
+    //         setList(data.repos);
+    //     };
+    //     load();
+    // }, []);
 
     useEffect(() => {
         const rootStyle = document.documentElement.style;

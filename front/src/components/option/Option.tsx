@@ -1,33 +1,29 @@
 import "./Option.css";
 import { BiSolidBrightness, BiSolidFilePlus } from "react-icons/bi";
 import RepoModal from "./repoModal/RepoModal";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import SettingModal from "./settingModal/SettingModal";
 import useRepositoryClick from "../../hooks/useRepositoryClick";
 import useRepositoryStore from "../../stores/repository/useRepositoryStore";
+import { Repository } from "../../global";
+import RepoContextMenu from "./repoContextMenu/RepoContextMenu";
 
 const Option = () => {
     const currentRepo = useRepositoryStore((s) => s.currentRepo);
     const repoList = useRepositoryStore((s) => s.list);
-    const { handleRepoClick, handleRepoRightClick } = useRepositoryClick();
+    const { handleRepoClick } = useRepositoryClick();
 
     const [isRepoModal, setIsRepoModal] = useState(false);
     const [isSetting, setIsSetting] = useState(false);
+    const [menu, setMenu] = useState<{ x: number; y: number } | null>(null);
 
-    const handleOpenRepoModal = () => {
-        setIsRepoModal(true);
-    };
-
-    const handleExitRepoModal = () => {
-        setIsRepoModal(false);
-    };
-
-    const openSetting = () => {
-        setIsSetting(true);
-    };
-
-    const exitSetting = () => {
-        setIsSetting(false);
+    const handleRepoRightClick = (
+        e: MouseEvent<HTMLDivElement>,
+        repo: Repository
+    ) => {
+        console.log(e);
+        setMenu({ x: e.clientX, y: e.clientY });
+        e.preventDefault();
     };
 
     return (
@@ -41,6 +37,8 @@ const Option = () => {
                                 currentRepo?.key === repo.key ? "opened" : ""
                             }`}
                             onClick={() => handleRepoClick(repo)}
+                            // onContextMenu={() => handleRepoRightClick(repo)}
+                            onContextMenu={(e) => handleRepoRightClick(e, repo)}
                         >
                             {repo.name}
                         </div>
@@ -49,7 +47,7 @@ const Option = () => {
                 <button
                     className="option-button "
                     title="add repository"
-                    onClick={handleOpenRepoModal}
+                    onClick={() => setIsRepoModal(true)}
                 >
                     <BiSolidFilePlus size={48} />
                 </button>
@@ -58,13 +56,22 @@ const Option = () => {
                 <button
                     className="option-button"
                     title="setting"
-                    onClick={openSetting}
+                    onClick={() => setIsSetting(true)}
                 >
                     <BiSolidBrightness size={48} />
                 </button>
             </div>
-            {isRepoModal && <RepoModal onExit={handleExitRepoModal} />}
-            {isSetting && <SettingModal onExit={exitSetting} />}
+            {isRepoModal && <RepoModal onExit={() => setIsRepoModal(false)} />}
+            {isSetting && <SettingModal onExit={() => setIsSetting(false)} />}
+            {menu && (
+                <RepoContextMenu
+                    x={menu.x}
+                    y={menu.y}
+                    onClose={() => {
+                        setMenu(null);
+                    }}
+                />
+            )}
         </div>
     );
 };
