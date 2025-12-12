@@ -7,21 +7,27 @@ import useRepositoryClick from "../../hooks/useRepositoryClick";
 import useRepositoryStore from "../../stores/repository/useRepositoryStore";
 import { Repository } from "../../global";
 import RepoContextMenu from "./repoContextMenu/RepoContextMenu";
+import RepoEditModal from "./repoEditModal/RepoEditModal";
 
 const Option = () => {
     const currentRepo = useRepositoryStore((s) => s.currentRepo);
-    const repoList = useRepositoryStore((s) => s.list);
+    const { list: repoList, remove } = useRepositoryStore();
     const { handleRepoClick } = useRepositoryClick();
 
+    const [isEdit, setIsEdit] = useState(false);
     const [isRepoModal, setIsRepoModal] = useState(false);
     const [isSetting, setIsSetting] = useState(false);
-    const [menu, setMenu] = useState<{ x: number; y: number } | null>(null);
+    const [editRepo, setEditRepo] = useState<Repository | null>(null);
+    const [menu, setMenu] = useState<{
+        x: number;
+        y: number;
+    } | null>(null);
 
     const handleRepoRightClick = (
         e: MouseEvent<HTMLDivElement>,
         repo: Repository
     ) => {
-        console.log(e);
+        setEditRepo(repo);
         setMenu({ x: e.clientX, y: e.clientY });
         e.preventDefault();
     };
@@ -37,7 +43,6 @@ const Option = () => {
                                 currentRepo?.key === repo.key ? "opened" : ""
                             }`}
                             onClick={() => handleRepoClick(repo)}
-                            // onContextMenu={() => handleRepoRightClick(repo)}
                             onContextMenu={(e) => handleRepoRightClick(e, repo)}
                         >
                             {repo.name}
@@ -63,13 +68,27 @@ const Option = () => {
             </div>
             {isRepoModal && <RepoModal onExit={() => setIsRepoModal(false)} />}
             {isSetting && <SettingModal onExit={() => setIsSetting(false)} />}
-            {menu && (
+            {menu && editRepo && (
                 <RepoContextMenu
                     x={menu.x}
                     y={menu.y}
                     onClose={() => {
                         setMenu(null);
                     }}
+                    onDelete={() => {
+                        remove(editRepo.key);
+                    }}
+                    onEdit={() => {
+                        setIsEdit(true);
+                        setEditRepo(editRepo);
+                        console.log("onEdit!");
+                    }}
+                />
+            )}
+            {isEdit && editRepo && (
+                <RepoEditModal
+                    onExit={() => setIsEdit(false)}
+                    editRepo={editRepo}
                 />
             )}
         </div>

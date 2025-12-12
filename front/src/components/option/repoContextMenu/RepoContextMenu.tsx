@@ -4,9 +4,11 @@ interface Props {
     x: number;
     y: number;
     onClose: () => void;
+    onEdit: () => void;
+    onDelete: () => void;
 }
 
-const RepoContextMenu = ({ x, y, onClose }: Props) => {
+const RepoContextMenu = ({ x, y, onClose, onEdit, onDelete }: Props) => {
     //다른 곳을 클릭하면 close
     useEffect(() => {
         const handler = () => onClose();
@@ -28,8 +30,18 @@ const RepoContextMenu = ({ x, y, onClose }: Props) => {
                 zIndex: 9999,
             }}
         >
-            <div style={{ padding: "4px 0", cursor: "pointer" }}>Edit</div>
-            <div style={{ padding: "4px 0", cursor: "pointer" }}>Delete</div>
+            <div
+                style={{ padding: "4px 0", cursor: "pointer" }}
+                onClick={onEdit}
+            >
+                Edit
+            </div>
+            <div
+                style={{ padding: "4px 0", cursor: "pointer" }}
+                onClick={onDelete}
+            >
+                Delete
+            </div>
         </div>
     );
 };
