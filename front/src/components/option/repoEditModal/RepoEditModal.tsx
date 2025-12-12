@@ -11,7 +11,7 @@ const RepoEditModal = ({
     onExit: () => void;
     editRepo: Repository;
 }) => {
-    const { add: addRepo, update } = useRepositoryStore();
+    const { update } = useRepositoryStore();
 
     const [data, setData] = useState({
         path: editRepo.path,
@@ -19,7 +19,6 @@ const RepoEditModal = ({
     });
 
     const handleExit = () => {
-        setData({ path: "", name: "" });
         onExit();
     };
 

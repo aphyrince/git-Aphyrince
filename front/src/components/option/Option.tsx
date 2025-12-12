@@ -10,15 +10,14 @@ import RepoContextMenu from "./repoContextMenu/RepoContextMenu";
 import RepoEditModal from "./repoEditModal/RepoEditModal";
 
 const Option = () => {
-    const currentRepo = useRepositoryStore((s) => s.currentRepo);
-    const { list: repoList, remove } = useRepositoryStore();
+    const { currentRepo, list: repoList, remove } = useRepositoryStore();
     const { handleRepoClick } = useRepositoryClick();
 
-    const [isEdit, setIsEdit] = useState(false);
-    const [isRepoModal, setIsRepoModal] = useState(false);
+    const [isAdd, setIsAdd] = useState(false);
     const [isSetting, setIsSetting] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
     const [editRepo, setEditRepo] = useState<Repository | null>(null);
-    const [menu, setMenu] = useState<{
+    const [menuPos, setMenuPos] = useState<{
         x: number;
         y: number;
     } | null>(null);
@@ -28,7 +27,7 @@ const Option = () => {
         repo: Repository
     ) => {
         setEditRepo(repo);
-        setMenu({ x: e.clientX, y: e.clientY });
+        setMenuPos({ x: e.clientX, y: e.clientY });
         e.preventDefault();
     };
 
@@ -52,7 +51,7 @@ const Option = () => {
                 <button
                     className="option-button "
                     title="add repository"
-                    onClick={() => setIsRepoModal(true)}
+                    onClick={() => setIsAdd(true)}
                 >
                     <BiSolidFilePlus size={48} />
                 </button>
@@ -66,14 +65,14 @@ const Option = () => {
                     <BiSolidBrightness size={48} />
                 </button>
             </div>
-            {isRepoModal && <RepoModal onExit={() => setIsRepoModal(false)} />}
+            {isAdd && <RepoModal onExit={() => setIsAdd(false)} />}
             {isSetting && <SettingModal onExit={() => setIsSetting(false)} />}
-            {menu && editRepo && (
+            {menuPos && editRepo && (
                 <RepoContextMenu
-                    x={menu.x}
-                    y={menu.y}
+                    x={menuPos.x}
+                    y={menuPos.y}
                     onClose={() => {
-                        setMenu(null);
+                        setMenuPos(null);
                     }}
                     onDelete={() => {
                         remove(editRepo.key);
@@ -81,7 +80,6 @@ const Option = () => {
                     onEdit={() => {
                         setIsEdit(true);
                         setEditRepo(editRepo);
-                        console.log("onEdit!");
                     }}
                 />
             )}
