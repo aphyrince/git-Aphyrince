@@ -1,35 +1,23 @@
 import "./Option.css";
 import { BiSolidBrightness, BiSolidFilePlus } from "react-icons/bi";
 import RepoModal from "./repoModal/RepoModal";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import SettingModal from "./settingModal/SettingModal";
 import useRepositoryClick from "../../hooks/useRepositoryClick";
 import useRepositoryStore from "../../stores/repository/useRepositoryStore";
-import { Repository } from "../../global";
 import RepoContextMenu from "./repoContextMenu/RepoContextMenu";
 import RepoEditModal from "./repoEditModal/RepoEditModal";
+import useRepoContextMenu from "../../hooks/useRepoContextMenu";
 
 const Option = () => {
     const { currentRepo, list: repoList, remove } = useRepositoryStore();
     const { handleRepoClick } = useRepositoryClick();
+    const { isOpen, pos, target, handleContextMenu, handleClose } =
+        useRepoContextMenu();
 
     const [isAdd, setIsAdd] = useState(false);
     const [isSetting, setIsSetting] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
-    const [editRepo, setEditRepo] = useState<Repository | null>(null);
-    const [menuPos, setMenuPos] = useState<{
-        x: number;
-        y: number;
-    } | null>(null);
-
-    const handleRepoRightClick = (
-        e: MouseEvent<HTMLDivElement>,
-        repo: Repository
-    ) => {
-        setEditRepo(repo);
-        setMenuPos({ x: e.clientX, y: e.clientY });
-        e.preventDefault();
-    };
 
     return (
         <div className="option">
@@ -42,7 +30,7 @@ const Option = () => {
                                 currentRepo?.key === repo.key ? "opened" : ""
                             }`}
                             onClick={() => handleRepoClick(repo)}
-                            onContextMenu={(e) => handleRepoRightClick(e, repo)}
+                            onContextMenu={(e) => handleContextMenu(e, repo)}
                         >
                             {repo.name}
                         </div>
@@ -67,26 +55,23 @@ const Option = () => {
             </div>
             {isAdd && <RepoModal onExit={() => setIsAdd(false)} />}
             {isSetting && <SettingModal onExit={() => setIsSetting(false)} />}
-            {menuPos && editRepo && (
+            {isOpen && pos && target && (
                 <RepoContextMenu
-                    x={menuPos.x}
-                    y={menuPos.y}
-                    onClose={() => {
-                        setMenuPos(null);
-                    }}
+                    x={pos.x}
+                    y={pos.y}
+                    onClose={handleClose}
                     onDelete={() => {
-                        remove(editRepo.key);
+                        remove(target.key);
                     }}
                     onEdit={() => {
                         setIsEdit(true);
-                        setEditRepo(editRepo);
                     }}
                 />
             )}
-            {isEdit && editRepo && (
+            {isEdit && target && (
                 <RepoEditModal
                     onExit={() => setIsEdit(false)}
-                    editRepo={editRepo}
+                    editRepo={target}
                 />
             )}
         </div>
