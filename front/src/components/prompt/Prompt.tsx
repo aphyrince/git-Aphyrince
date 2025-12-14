@@ -1,14 +1,20 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import usePromptStore from "../../stores/prompt/usePromptStore";
 import "./Prompt.css";
 import { BsArrowRightSquareFill } from "react-icons/bs";
 import commandExe from "../../preloads/commandExe";
+import useRepositoryStore from "../../stores/repository/useRepositoryStore";
 
 const Prompt = () => {
     const list = usePromptStore((state) => state.list);
     const addLine = usePromptStore((state) => state.add);
     const [input, setInput] = useState("");
-    const [path, setPath] = useState("");
+    const { currentRepo } = useRepositoryStore();
+    const [path, setPath] = useState("error");
+
+    useEffect(() => {
+        setPath(currentRepo?.path || "error");
+    }, [currentRepo, path]);
 
     const commandExecute = useCallback(async (command: string) => {
         const cmdResult = await commandExe(command);
@@ -45,6 +51,7 @@ const Prompt = () => {
                 </ul>
             </div>
             <div className="input flex-center">
+                <p className="path">{path}</p>
                 <input
                     className="cmd"
                     type="text"
