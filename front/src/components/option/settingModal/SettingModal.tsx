@@ -1,20 +1,22 @@
 import { ChangeEvent } from "react";
-import useThemeStore from "../../../stores/theme/useThemeStore";
+
 import "./SettingModal.css";
 import { BsXCircleFill } from "react-icons/bs";
+import useThemeStore from "../../../stores/theme/useThemeStore";
 
 const SettingModal = ({ onExit }: { onExit: () => void }) => {
-    const { currentTheme, setTheme } = useThemeStore();
+    const { mode, keyColor, toggleMode, setKeyColor } = useThemeStore();
 
     const handleExit = () => {
         onExit();
     };
 
     const handleThemeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        const newTheme = { ...currentTheme, [name]: value };
-        setTheme(newTheme);
-        console.log(value);
+        toggleMode();
+    };
+
+    const handleKeyColorChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setKeyColor(e.target.value);
     };
 
     return (
@@ -33,11 +35,11 @@ const SettingModal = ({ onExit }: { onExit: () => void }) => {
                 </div>
                 <div className="setting-content">
                     <div className="setting-color">
-                        <label>font color</label>
+                        <label>Dark Mode</label>
                         <input
-                            name="fontColor"
-                            type="color"
-                            value={currentTheme.fontColor}
+                            name="mode"
+                            type="checkbox"
+                            checked={mode === "dark"}
                             onChange={handleThemeChange}
                         />
                     </div>
@@ -46,17 +48,8 @@ const SettingModal = ({ onExit }: { onExit: () => void }) => {
                         <input
                             name="keyColor"
                             type="color"
-                            value={currentTheme.keyColor}
-                            onChange={handleThemeChange}
-                        />
-                    </div>
-                    <div className="setting-color">
-                        <label>bg color</label>
-                        <input
-                            name="bgColor"
-                            type="color"
-                            value={currentTheme.bgColor}
-                            onChange={handleThemeChange}
+                            value={keyColor}
+                            onChange={handleKeyColorChange}
                         />
                     </div>
                 </div>

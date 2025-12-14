@@ -5,8 +5,6 @@ import History from "./components/history/History";
 import Option from "./components/option/Option";
 import { useEffect } from "react";
 import useApplyTheme from "./hooks/useApplyTheme";
-import useThemeStore from "./stores/theme/useThemeStore";
-import useInitializeThemeFromCSS from "./hooks/useInitializeThemeFromCSS";
 import useResizableLayout from "./hooks/useResizableLayout";
 import useRepositoryState from "./stores/repository/useRepositoryStore";
 import dataLoad from "./preloads/dataLoad";
@@ -15,9 +13,7 @@ const App = () => {
     const { isDragging, containerRef, cols, onMouse } = useResizableLayout([
         45, 34, 20,
     ]);
-    const setTheme = useThemeStore((s) => s.setTheme);
-    const setList = useRepositoryState((s) => s.setList);
-    useInitializeThemeFromCSS();
+    const { setList } = useRepositoryState();
     useApplyTheme();
 
     // useEffect(() => {
@@ -27,16 +23,6 @@ const App = () => {
     //     };
     //     load();
     // }, []);
-
-    useEffect(() => {
-        const rootStyle = document.documentElement.style;
-
-        const fontColor = rootStyle.getPropertyValue("--font-color");
-        const bgColor = rootStyle.getPropertyValue("--bg-color");
-        const keyColor = rootStyle.getPropertyPriority("--key-color");
-
-        setTheme({ fontColor, bgColor, keyColor });
-    }, []);
 
     useEffect(() => {
         document.addEventListener("mousemove", onMouse.move);

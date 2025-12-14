@@ -1,30 +1,33 @@
 import { create } from "zustand";
 
-interface Theme {
-    fontColor: string;
-    bgColor: string;
-    keyColor: string;
-}
+type Theme = "dark" | "white";
+
+export const WHITE = "#ffffff";
+export const BLACK = "#111111";
 
 interface ThemeStatus {
-    currentTheme: Theme;
-    setTheme: (theme: Theme) => void;
+    mode: Theme;
+    keyColor: string;
+    setTheme: (mode: Theme, keyColor: string) => void;
+    toggleMode: () => void;
     setKeyColor: (color: string) => void;
 }
 
 const useThemeStore = create<ThemeStatus>((set) => ({
-    currentTheme: {
-        fontColor: "#000000",
-        bgColor: "#ffffff",
-        keyColor: "#aaaaaa",
+    mode: "white",
+    keyColor: "#aaaaaa",
+    setTheme: (mode: Theme, keyColor: string) => {
+        set(() => ({ mode, keyColor }));
     },
-    setTheme: (theme: Theme) => {
-        set(() => ({ currentTheme: theme }));
+    toggleMode: () => {
+        set((s) => {
+            const nextMode = s.mode === "white" ? "dark" : "white";
+            return { mode: nextMode };
+        });
     },
     setKeyColor: (keyColor: string) => {
-        set((s) => {
-            const newTheme = { ...s.currentTheme, keyColor };
-            return { currentTheme: newTheme };
+        set(() => {
+            return { keyColor };
         });
     },
 }));
