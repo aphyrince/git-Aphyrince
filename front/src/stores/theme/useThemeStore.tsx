@@ -9,6 +9,7 @@ interface Theme {
 interface ThemeStatus {
     currentTheme: Theme;
     setTheme: (theme: Theme) => void;
+    setKeyColor: (color: string) => void;
 }
 
 const useThemeStore = create<ThemeStatus>((set) => ({
@@ -19,6 +20,12 @@ const useThemeStore = create<ThemeStatus>((set) => ({
     },
     setTheme: (theme: Theme) => {
         set(() => ({ currentTheme: theme }));
+    },
+    setKeyColor: (keyColor: string) => {
+        set((s) => {
+            const newTheme = { ...s.currentTheme, keyColor };
+            return { currentTheme: newTheme };
+        });
     },
 }));
 
