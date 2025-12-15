@@ -14,6 +14,7 @@ const App = () => {
         45, 34, 20,
     ]);
     const { setList } = useRepositoryState();
+
     useApplyTheme();
 
     // useEffect(() => {

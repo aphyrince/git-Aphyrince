@@ -4,6 +4,7 @@ import "./Prompt.css";
 import { BsArrowRightSquareFill } from "react-icons/bs";
 import commandExe from "../../preloads/commandExe";
 import useRepositoryStore from "../../stores/repository/useRepositoryStore";
+import useCmdStore from "../../stores/command/useCmdStore";
 
 const Prompt = () => {
     const list = usePromptStore((state) => state.list);
@@ -11,14 +12,16 @@ const Prompt = () => {
     const [input, setInput] = useState("");
     const { currentRepo } = useRepositoryStore();
     const [path, setPath] = useState("error");
+    const { addCmd } = useCmdStore();
 
     useEffect(() => {
         setPath(currentRepo?.path || "error");
     }, [currentRepo, path]);
 
     const commandExecute = useCallback(async (command: string) => {
-        const cmdResult = await commandExe(command);
-        addLine(cmdResult.output, "result");
+        console.log("command transmitted.");
+        // const cmdResult = await commandExe(command);
+        // addLine(cmdResult.output, "result");
     }, []);
 
     const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -29,6 +32,7 @@ const Prompt = () => {
         if (input === "") return;
         addLine(input, "cmd");
         commandExecute(input);
+        addCmd(input);
         setInput("");
     }, [input, addLine]);
 
