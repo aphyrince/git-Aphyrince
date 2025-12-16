@@ -15,10 +15,11 @@ const useRepositoryStore = create<RepositoryState>((set) => ({
     currentRepo: null,
     list: [],
     add: (name: string, path: string) => {
+        const newKey = new Date().getTime().toString();
         const newRepo = {
             name,
             path,
-            key: Date(),
+            key: newKey,
             hisList: [],
             promptList: [],
         };

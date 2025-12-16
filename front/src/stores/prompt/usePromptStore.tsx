@@ -14,13 +14,18 @@ interface PromptLineState {
     clear: () => void;
     setPrompt: (newList: PromptLine[]) => void;
     setCurrentRepo: (repo: Repository) => void;
+    cmdPaste: string;
+    cmdExec: string;
+    setCmdPaste: (cmd: string) => void;
+    setCmdExec: (cmd: string) => void;
 }
 
 const usePromptStore = create<PromptLineState>((set) => ({
     currentRepo: null,
     list: [],
     add: (text: string, type: "result" | "cmd") => {
-        const newLine = { text, type, key: Date() };
+        const newKey = new Date().getTime().toString();
+        const newLine = { text, type, key: newKey };
         set((state) => ({ list: [...state.list, newLine] }));
     },
     clear: () => {
@@ -31,6 +36,14 @@ const usePromptStore = create<PromptLineState>((set) => ({
     },
     setCurrentRepo: (repo: Repository) => {
         set(() => ({ currentRepo: repo }));
+    },
+    cmdPaste: "",
+    cmdExec: "",
+    setCmdPaste: (cmd: string) => {
+        set(() => ({ cmdPaste: cmd }));
+    },
+    setCmdExec: (cmd: string) => {
+        set(() => ({ cmdExec: cmd }));
     },
 }));
 

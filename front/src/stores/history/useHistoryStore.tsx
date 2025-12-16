@@ -50,7 +50,8 @@ const useHistoryStore = create<HistoryState>((set) => ({
     currentRepo: null,
     list: dummyHistory,
     add: (history: HistoryItem) => {
-        history.key = Date();
+        const newKey = new Date().getTime().toString();
+        history.key = newKey;
         set((state) => ({ list: [...state.list, history] }));
     },
     update: (history: HistoryItem) => {

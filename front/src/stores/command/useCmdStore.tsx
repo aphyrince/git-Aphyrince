@@ -15,7 +15,8 @@ const useCmdStore = create<CmdState>((set) => ({
     cmdList: [],
 
     addCmd: (cmd) => {
-        const newCmd: Cmd = { text: cmd, key: Date() };
+        const newKey = new Date().getTime().toString();
+        const newCmd: Cmd = { text: cmd, key: newKey };
         set((state) => ({ cmdList: [...state.cmdList, newCmd] }));
     },
 
