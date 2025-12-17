@@ -1,6 +1,6 @@
 import "./App.css";
 import CmdCache from "./components/CmdCache/CmdCache";
-import Prompt from "./components/prompt/Prompt";
+import Prompt from "./components/Prompt/Prompt";
 import History from "./components/History/History";
 import Header from "./components/Header/Header";
 import { useEffect } from "react";
