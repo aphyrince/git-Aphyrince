@@ -5,8 +5,8 @@ import useRepoContextMenu from "../../../hooks/useRepoContextMenu";
 import { BiSolidFilePlus } from "react-icons/bi";
 import RepoContextMenu from "./repoContextMenu/RepoContextMenu";
 import { useState } from "react";
-import RepoEditModal from "./modals/EditModal/RepoEditModal";
-import RepoModal from "./modals/AddModal/RepoModal";
+import RepoEditModal from "./modals/EditModal/EditModal";
+import AddModal from "./modals/AddModal";
 
 const Wrapper = styled.div`
     display: flex;
@@ -84,7 +84,7 @@ const RepoList = () => {
             <Button title="add repository" onClick={() => setIsAdd(true)}>
                 <BiSolidFilePlus size={48} />
             </Button>
-            {isAdd && <RepoModal onExit={() => setIsAdd(false)} />}
+            {isAdd && <AddModal onExit={() => setIsAdd(false)} />}
             {isOpen && pos && target && (
                 <RepoContextMenu
                     x={pos.x}

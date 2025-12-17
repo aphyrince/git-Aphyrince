@@ -1,21 +1,30 @@
 import { ChangeEvent, useState } from "react";
-import "./RepoModal.css";
+import "./RepoEditModal.css";
 import { BsPlusSquareFill, BsXSquareFill, BsXCircleFill } from "react-icons/bs";
 import useRepositoryStore from "../../../../../stores/repository/useRepositoryStore";
+import { Repository } from "../../../../../global";
 
-const RepoModal = ({ onExit }: { onExit: () => void }) => {
-    const addRepo = useRepositoryStore((s) => s.add);
+const EditModal = ({
+    onExit,
+    editRepo,
+}: {
+    onExit: () => void;
+    editRepo: Repository;
+}) => {
+    const { update } = useRepositoryStore();
 
-    const [data, setData] = useState({ path: "", name: "" });
+    const [data, setData] = useState({
+        path: editRepo.path,
+        name: editRepo.name,
+    });
 
     const handleExit = () => {
-        setData({ path: "", name: "" });
         onExit();
     };
 
-    const handleCreate = () => {
+    const handleEdit = () => {
         if (data.path === "" || data.name === "") return;
-        addRepo(data.name, data.path);
+        update({ ...editRepo, ...data });
         handleExit();
     };
 
@@ -37,7 +46,7 @@ const RepoModal = ({ onExit }: { onExit: () => void }) => {
                 }}
             >
                 <div className="modal-header">
-                    <span>Add repository</span>
+                    <span>Edit repository</span>
                     <button className="option-button" onClick={handleExit}>
                         <BsXCircleFill size={24} />
                     </button>
@@ -66,7 +75,7 @@ const RepoModal = ({ onExit }: { onExit: () => void }) => {
                     <button onClick={handleExit} className="option-button">
                         <BsXSquareFill size={40} />
                     </button>
-                    <button onClick={handleCreate} className="option-button">
+                    <button onClick={handleEdit} className="option-button">
                         <BsPlusSquareFill size={40} />
                     </button>
                 </div>
@@ -75,4 +84,4 @@ const RepoModal = ({ onExit }: { onExit: () => void }) => {
     );
 };
 
-export default RepoModal;
+export default EditModal;
