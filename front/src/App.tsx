@@ -1,5 +1,5 @@
 import "./App.css";
-import CmdList from "./components/cmd-list/CmdList";
+import CmdCache from "./components/CmdCache/";
 import Prompt from "./components/prompt/Prompt";
 import History from "./components/history/History";
 import Option from "./components/option/Option";
@@ -8,6 +8,7 @@ import useApplyTheme from "./hooks/useApplyTheme";
 import useResizableLayout from "./hooks/useResizableLayout";
 import useRepositoryState from "./stores/repository/useRepositoryStore";
 import dataLoad from "./preloads/dataLoad";
+import CmdCache2 from "./components/CmdCache";
 
 const App = () => {
     const { isDragging, containerRef, cols, onMouse } = useResizableLayout([
@@ -49,7 +50,8 @@ const App = () => {
                 <div className="handle" onMouseDown={() => onMouse.down(0)} />
                 <Prompt />
                 <div className="handle" onMouseDown={() => onMouse.down(1)} />
-                <CmdList />
+                {/* <CmdCache /> */}
+                <CmdCache />
             </div>
         </div>
     );
