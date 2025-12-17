@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import "./RepoModal.css";
 import { BsPlusSquareFill, BsXSquareFill, BsXCircleFill } from "react-icons/bs";
-import useRepositoryStore from "../../../stores/repository/useRepositoryStore";
+import useRepositoryStore from "../../../../../stores/repository/useRepositoryStore";
 
 const RepoModal = ({ onExit }: { onExit: () => void }) => {
     const addRepo = useRepositoryStore((s) => s.add);

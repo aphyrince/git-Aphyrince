@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import "./RepoEditModal.css";
 import { BsPlusSquareFill, BsXSquareFill, BsXCircleFill } from "react-icons/bs";
-import useRepositoryStore from "../../../stores/repository/useRepositoryStore";
-import { Repository } from "../../../global";
+import useRepositoryStore from "../../../../../stores/repository/useRepositoryStore";
+import { Repository } from "../../../../../global";
 
 const RepoEditModal = ({
     onExit,
