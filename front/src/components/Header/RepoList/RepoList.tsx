@@ -5,7 +5,7 @@ import useRepoContextMenu from "../../../hooks/useRepoContextMenu";
 import { BiSolidFilePlus } from "react-icons/bi";
 import RepoContextMenu from "./repoContextMenu/RepoContextMenu";
 import { useState } from "react";
-import RepoEditModal from "./modals/EditModal/EditModal";
+import RepoEditModal from "./modals/EditModal";
 import AddModal from "./modals/AddModal";
 
 const Wrapper = styled.div`

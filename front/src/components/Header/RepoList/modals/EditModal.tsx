@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { BsPlusSquareFill, BsXSquareFill, BsXCircleFill } from "react-icons/bs";
 import useRepositoryStore from "../../../../stores/repository/useRepositoryStore";
+import { Repository } from "../../../../global";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -105,19 +106,27 @@ const Button = styled.div`
     }
 `;
 
-const AddModal = ({ onExit }: { onExit: () => void }) => {
-    const addRepo = useRepositoryStore((s) => s.add);
+const EditModal = ({
+    onExit,
+    editRepo,
+}: {
+    onExit: () => void;
+    editRepo: Repository;
+}) => {
+    const { update } = useRepositoryStore();
 
-    const [data, setData] = useState({ path: "", name: "" });
+    const [data, setData] = useState({
+        path: editRepo.path,
+        name: editRepo.name,
+    });
 
     const handleExit = () => {
-        setData({ path: "", name: "" });
         onExit();
     };
 
-    const handleCreate = () => {
+    const handleEdit = () => {
         if (data.path === "" || data.name === "") return;
-        addRepo(data.name, data.path);
+        update({ ...editRepo, ...data });
         handleExit();
     };
 
@@ -138,7 +147,7 @@ const AddModal = ({ onExit }: { onExit: () => void }) => {
                 }}
             >
                 <ModalHeader>
-                    <span>Add repository</span>
+                    <span>Edit repository</span>
                     <Button onClick={handleExit}>
                         <BsXCircleFill size={24} />
                     </Button>
@@ -167,7 +176,7 @@ const AddModal = ({ onExit }: { onExit: () => void }) => {
                     <Button onClick={handleExit}>
                         <BsXSquareFill size={40} />
                     </Button>
-                    <Button onClick={handleCreate}>
+                    <Button onClick={handleEdit}>
                         <BsPlusSquareFill size={40} />
                     </Button>
                 </ButtonContainer>
@@ -176,4 +185,4 @@ const AddModal = ({ onExit }: { onExit: () => void }) => {
     );
 };
 
-export default AddModal;
+export default EditModal;
