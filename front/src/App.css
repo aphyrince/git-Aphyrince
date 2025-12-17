@@ -40,13 +40,6 @@ body,
     background-color: var(--bg-color);
 }
 
-.option {
-    width: 100%;
-    height: 8vh;
-    background-color: var(--key-color);
-    color: var(--font-color);
-}
-
 .content {
     width: 100%;
     height: 92vh;

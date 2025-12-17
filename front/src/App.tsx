@@ -2,7 +2,7 @@ import "./App.css";
 import CmdCache from "./components/CmdCache/CmdCache";
 import Prompt from "./components/prompt/Prompt";
 import History from "./components/history/History";
-import Option from "./components/option/Option";
+import Header from "./components/Header/Header";
 import { useEffect } from "react";
 import useApplyTheme from "./hooks/useApplyTheme";
 import useResizableLayout from "./hooks/useResizableLayout";
@@ -36,7 +36,7 @@ const App = () => {
 
     return (
         <div className="app-container">
-            <Option />
+            <Header />
             <div
                 className={`content ${isDragging ? "blurred" : ""}`}
                 ref={containerRef}
