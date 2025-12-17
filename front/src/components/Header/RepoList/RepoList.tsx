@@ -7,33 +7,13 @@ import RepoContextMenu from "./RepoContextMenu";
 import { useState } from "react";
 import RepoEditModal from "./modals/EditModal";
 import AddModal from "./modals/AddModal";
+import { Button } from "../Header";
 
 const Wrapper = styled.div`
     display: flex;
     align-items: end;
     width: fit-content;
     height: 100%;
-`;
-
-const Button = styled.div`
-    width: fit-content;
-    height: fit-content;
-
-    border: none;
-    background: none;
-    border-radius: 4px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    color: var(--font-color);
-
-    &:hover {
-        color: var(--bg-color);
-    }
 `;
 
 const RepoItem = styled.div`

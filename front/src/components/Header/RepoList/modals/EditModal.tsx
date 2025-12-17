@@ -3,6 +3,7 @@ import { BsPlusSquareFill, BsXSquareFill, BsXCircleFill } from "react-icons/bs";
 import useRepositoryStore from "../../../../stores/repository/useRepositoryStore";
 import { Repository } from "../../../../global";
 import styled from "styled-components";
+import { Button } from "../../Header";
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -82,27 +83,6 @@ const ButtonContainer = styled.div`
     height: 80px;
     & > button:hover {
         color: var(--key-color);
-    }
-`;
-
-const Button = styled.div`
-    width: fit-content;
-    height: fit-content;
-
-    border: none;
-    background: none;
-    border-radius: 4px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    color: var(--font-color);
-
-    &:hover {
-        color: var(--bg-color);
     }
 `;
 

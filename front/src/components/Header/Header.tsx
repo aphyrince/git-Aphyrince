@@ -1,8 +1,6 @@
-import { BiSolidBrightness } from "react-icons/bi";
-import { useState } from "react";
-import SettingModal from "./settingModal/SettingModal";
 import styled from "styled-components";
 import RepoList from "./RepoList/RepoList";
+import Setting from "./Setting/Setting";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -24,7 +22,7 @@ const Section = styled.div`
     gap: 10px;
 `;
 
-const Button = styled.div`
+export const Button = styled.div`
     width: fit-content;
     height: fit-content;
 
@@ -46,19 +44,14 @@ const Button = styled.div`
 `;
 
 const Header = () => {
-    const [isSetting, setIsSetting] = useState(false);
-
     return (
         <Wrapper>
             <Section>
                 <RepoList />
             </Section>
             <Section>
-                <Button title="setting" onClick={() => setIsSetting(true)}>
-                    <BiSolidBrightness size={48} />
-                </Button>
+                <Setting />
             </Section>
-            {isSetting && <SettingModal onExit={() => setIsSetting(false)} />}
         </Wrapper>
     );
 };
