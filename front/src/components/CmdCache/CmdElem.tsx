@@ -1,10 +1,29 @@
-import { BsTextWrap, BsFillFileExcelFill } from "react-icons/bs";
-import "./CmdElem.css";
-import useCmdStore, { Cmd } from "../../../stores/command/useCmdStore";
-import { MouseEvent, useCallback } from "react";
-import usePromptStore from "../../../stores/prompt/usePromptStore";
-import useCmdCacheContextMenu from "../../../hooks/useCmdCacheContextMenu";
-import CmdContextMenu from "./CmdContextMenu/CmdContextMenu";
+import useCmdStore, { Cmd } from "../../stores/command/useCmdStore";
+import { useCallback } from "react";
+import usePromptStore from "../../stores/prompt/usePromptStore";
+import useCmdCacheContextMenu from "../../hooks/useCmdCacheContextMenu";
+import CmdContextMenu from "./CmdContextMenu";
+import styled from "styled-components";
+
+const CmdListElem = styled.li`
+    position: relative;
+    font-size: 20px;
+    border-radius: 4px;
+    border: 2px solid var(--key-color);
+    padding-left: 4px;
+    transition: 0.3s ease;
+    margin-bottom: 5px;
+    color: var(--font-color);
+
+    & > p {
+        flex: 1;
+    }
+
+    &:hover {
+        background-color: var(--key-color);
+        cursor: pointer;
+    }
+`;
 
 const CmdElem = ({ cmd }: { cmd: Cmd }) => {
     const { deleteCmd } = useCmdStore();
@@ -12,28 +31,12 @@ const CmdElem = ({ cmd }: { cmd: Cmd }) => {
     const { isOpen, pos, target, handleContextMenu, handleClose } =
         useCmdCacheContextMenu();
 
-    const handleDelete = useCallback(
-        (e: MouseEvent) => {
-            deleteCmd(cmd.key);
-            e.stopPropagation();
-        },
-        [deleteCmd, cmd.key]
-    );
-
     const handleExec = useCallback(() => {
         setCmdExec(cmd.text);
     }, [cmd, setCmdExec]);
 
-    const handlePaste = useCallback(
-        (e: MouseEvent) => {
-            setCmdPaste(cmd.text);
-            e.stopPropagation();
-        },
-        [cmd, setCmdPaste]
-    );
-
     return (
-        <li
+        <CmdListElem
             className="cmd-elem flex-center"
             title="excute"
             onClick={handleExec}
@@ -53,7 +56,7 @@ const CmdElem = ({ cmd }: { cmd: Cmd }) => {
                     }}
                 />
             )}
-        </li>
+        </CmdListElem>
     );
 };
 

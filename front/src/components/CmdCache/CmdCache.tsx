@@ -1,10 +1,8 @@
 import { useCallback, useState } from "react";
 import styled from "styled-components";
 import useCmdStore from "../../stores/command/useCmdStore";
-import CmdElem from "./CmdElem/CmdElem";
+import CmdElem from "./CmdElem";
 import { BsFilePlusFill } from "react-icons/bs";
-
-/* ===== styled-components ===== */
 
 const Wrapper = styled.div`
     height: 92vh;
@@ -55,8 +53,6 @@ const AddButton = styled.button`
         filter: opacity(70%);
     }
 `;
-
-/* ===== component ===== */
 
 const CmdCache = () => {
     const cmdList = useCmdStore((state) => state.cmdList);
