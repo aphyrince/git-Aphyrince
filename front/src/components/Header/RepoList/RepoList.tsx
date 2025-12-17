@@ -3,7 +3,7 @@ import useRepositoryStore from "../../../stores/repository/useRepositoryStore";
 import useRepositoryClick from "../../../hooks/useRepositoryClick";
 import useRepoContextMenu from "../../../hooks/useRepoContextMenu";
 import { BiSolidFilePlus } from "react-icons/bi";
-import RepoContextMenu from "./repoContextMenu/RepoContextMenu";
+import RepoContextMenu from "./RepoContextMenu";
 import { useState } from "react";
 import RepoEditModal from "./modals/EditModal";
 import AddModal from "./modals/AddModal";
