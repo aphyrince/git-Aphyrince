@@ -6,24 +6,20 @@ import Header from "./components/Header/Header";
 import { useEffect } from "react";
 import useApplyTheme from "./hooks/useApplyTheme";
 import useResizableLayout from "./hooks/useResizableLayout";
-import useRepositoryState from "./stores/repository/useRepositoryStore";
-import dataLoad from "./preloads/dataLoad";
+import useFetchActions from "./hooks/useFetchActions";
 
 const App = () => {
     const { isDragging, containerRef, cols, onMouse } = useResizableLayout([
         45, 34, 20,
     ]);
-    const { setList } = useRepositoryState();
+    const { initialLoading } = useFetchActions();
 
     useApplyTheme();
 
-    // useEffect(() => {
-    //     const load = async () => {
-    //         const data = await dataLoad();
-    //         setList(data.repos);
-    //     };
-    //     load();
-    // }, []);
+    // 초기 로딩
+    useEffect(() => {
+        initialLoading();
+    }, []);
 
     useEffect(() => {
         document.addEventListener("mousemove", onMouse.move);
