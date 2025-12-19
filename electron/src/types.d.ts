@@ -26,11 +26,9 @@ interface Cmd {
     key: string;
 }
 
-interface Theme {
+interface ThemeData {
     mode: "dark" | "white";
     keyColor: string;
-    fontColor: string;
-    bgColor: string;
 }
 
 interface Data {

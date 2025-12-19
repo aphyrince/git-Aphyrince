@@ -32,18 +32,16 @@ export interface Cmd {
     key: string;
 }
 
-export interface Theme {
+export interface ThemeData {
     mode: "dark" | "white";
     keyColor: string;
-    fontColor: string;
-    bgColor: string;
 }
 
 export interface Data {
     currentRepo: Repository | null;
     repos: Repository[];
     cmds: Cmd[];
-    theme: Theme;
+    themeData: ThemeData;
 }
 
 export {};
