@@ -44,6 +44,7 @@ app.on("ready", () => {
         } catch (error) {
             console.error(error);
             return {
+                currentRepo: null,
                 repos: [],
                 cmds: [],
                 theme: {

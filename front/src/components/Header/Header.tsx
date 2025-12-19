@@ -22,7 +22,7 @@ const Section = styled.div`
     gap: 10px;
 `;
 
-export const Button = styled.div`
+export const Button = styled.button`
     width: fit-content;
     height: fit-content;
 

@@ -40,6 +40,7 @@ export interface Theme {
 }
 
 export interface Data {
+    currentRepo: Repository | null;
     repos: Repository[];
     cmds: Cmd[];
     theme: Theme;

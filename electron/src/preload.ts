@@ -17,7 +17,3 @@ contextBridge.exposeInMainWorld("store", {
         return ipcRenderer.invoke("command-exe", command);
     },
 });
-
-/* command -> result -> 
-    initial loading     /   update
-*/

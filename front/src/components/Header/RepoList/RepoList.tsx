@@ -14,6 +14,10 @@ const Wrapper = styled.div`
     align-items: end;
     width: fit-content;
     height: 100%;
+
+    & > button {
+        align-self: center;
+    }
 `;
 
 const RepoItem = styled.div`
