@@ -3,6 +3,7 @@ import styled from "styled-components";
 import useCmdStore from "../../stores/command/useCmdStore";
 import CmdElem from "./CmdElem";
 import { BsFilePlusFill } from "react-icons/bs";
+import useFetchActions from "../../hooks/useFetchActions";
 
 const Wrapper = styled.div`
     height: 92vh;
@@ -58,6 +59,7 @@ const CmdCache = () => {
     const cmdList = useCmdStore((state) => state.cmdList);
     const addCmd = useCmdStore((state) => state.addCmd);
     const [input, setInput] = useState("");
+    const { updateFetch } = useFetchActions();
 
     const handleChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +79,7 @@ const CmdCache = () => {
         if (input === "") return;
         addCmd(input);
         setInput("");
+        updateFetch();
     }, [addCmd, input]);
 
     return (

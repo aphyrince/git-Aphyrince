@@ -4,6 +4,7 @@ import usePromptStore from "../../stores/prompt/usePromptStore";
 import useCmdCacheContextMenu from "../../hooks/useCmdCacheContextMenu";
 import CmdContextMenu from "./CmdContextMenu";
 import styled from "styled-components";
+import useFetchActions from "../../hooks/useFetchActions";
 
 const CmdListElem = styled.li`
     position: relative;
@@ -30,6 +31,7 @@ const CmdElem = ({ cmd }: { cmd: Cmd }) => {
     const { setCmdExec, setCmdPaste } = usePromptStore();
     const { isOpen, pos, target, handleContextMenu, handleClose } =
         useCmdCacheContextMenu();
+    const { updateFetch } = useFetchActions();
 
     const handleExec = useCallback(() => {
         setCmdExec(cmd.text);
@@ -50,6 +52,7 @@ const CmdElem = ({ cmd }: { cmd: Cmd }) => {
                     onClose={handleClose}
                     onDelete={() => {
                         deleteCmd(cmd.key);
+                        updateFetch();
                     }}
                     onPaste={() => {
                         setCmdPaste(cmd.text);
