@@ -3,6 +3,7 @@ import { BsXCircleFill } from "react-icons/bs";
 import useThemeStore from "../../../stores/theme/useThemeStore";
 import styled from "styled-components";
 import { Button } from "../Header";
+import useFetchActions from "../../../hooks/useFetchActions";
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -60,17 +61,20 @@ const Color = styled.div`
 
 const SettingModal = ({ onExit }: { onExit: () => void }) => {
     const { mode, keyColor, toggleMode, setKeyColor } = useThemeStore();
+    const { updateFetch } = useFetchActions();
 
     const handleExit = () => {
         onExit();
     };
 
-    const handleThemeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleThemeChange = () => {
         toggleMode();
+        updateFetch();
     };
 
     const handleKeyColorChange = (e: ChangeEvent<HTMLInputElement>) => {
         setKeyColor(e.target.value);
+        updateFetch();
     };
 
     return (
