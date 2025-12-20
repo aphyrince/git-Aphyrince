@@ -97,8 +97,8 @@ const Prompt = () => {
 
     const commandTransmit = useCallback(async (command: string) => {
         console.log("command transmitted.");
-        // const cmdResult = await commandExe(command);
-        // addLine(cmdResult.output, "result");
+        const cmdResult = await commandExe(command);
+        addLine(cmdResult.output, "result");
     }, []);
 
     useEffect(() => {
