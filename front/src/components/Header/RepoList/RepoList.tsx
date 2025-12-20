@@ -8,6 +8,7 @@ import { useState } from "react";
 import RepoEditModal from "./modals/EditModal";
 import AddModal from "./modals/AddModal";
 import { Button } from "../Header";
+import useFetchActions from "../../../hooks/useFetchActions";
 
 const Wrapper = styled.div`
     display: flex;
@@ -50,6 +51,7 @@ const RepoList = () => {
         useRepoContextMenu();
     const [isAdd, setIsAdd] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
+    const { updateFetch } = useFetchActions();
 
     return (
         <Wrapper>
@@ -59,7 +61,10 @@ const RepoList = () => {
                     className={`${
                         currentRepo?.key === repo.key ? "opened" : ""
                     }`}
-                    onClick={() => handleRepoClick(repo)}
+                    onClick={() => {
+                        handleRepoClick(repo);
+                        updateFetch();
+                    }}
                     onContextMenu={(e) => handleContextMenu(e, repo)}
                 >
                     {repo.name}
@@ -76,9 +81,11 @@ const RepoList = () => {
                     onClose={handleClose}
                     onDelete={() => {
                         remove(target.key);
+                        updateFetch();
                     }}
                     onEdit={() => {
                         setIsEdit(true);
+                        updateFetch();
                     }}
                 />
             )}
