@@ -95,11 +95,14 @@ const Prompt = () => {
         setPath(currentRepo?.path || "error");
     }, [currentRepo, path]);
 
-    const commandTransmit = useCallback(async (command: string) => {
-        console.log("command transmitted.");
-        const cmdResult = await commandExe(command);
-        addLine(cmdResult.output, "result");
-    }, []);
+    const commandTransmit = useCallback(
+        async (command: string) => {
+            console.log("command transmitted.");
+            const cmdResult = await commandExe(path, command);
+            addLine(cmdResult.output, "result");
+        },
+        [path]
+    );
 
     useEffect(() => {
         if (cmdExec === "") return;

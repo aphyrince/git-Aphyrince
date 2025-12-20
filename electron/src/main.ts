@@ -71,10 +71,12 @@ app.on("ready", () => {
         }
     });
 
-    ipcMain.handle("command-exe", async (_, command) => {
-        console.log("COMMAND EXE CALLED WITH :", command);
+    ipcMain.handle("command-exe", async (_, path, command) => {
+        console.log(
+            `COMMAND EXE CALLED WITH : path:${path}, command:${command}`
+        );
         return new Promise((resolve, _) => {
-            exec(command, (error, stdout, stderr) => {
+            exec(`${path} ${command}`, (error, stdout, stderr) => {
                 if (error) {
                     resolve({ success: false, output: stderr });
                 } else {

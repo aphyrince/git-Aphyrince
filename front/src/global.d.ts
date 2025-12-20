@@ -52,6 +52,7 @@ declare global {
             dataLoad: () => Promise<Data>;
             dataUpdate: (newData: Data) => Promise<boolean>;
             commandExe: (
+                path: string,
                 command: string
             ) => Promise<{ success: boolean; output: string }>;
         };

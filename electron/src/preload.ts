@@ -11,6 +11,7 @@ contextBridge.exposeInMainWorld("store", {
         return ipcRenderer.invoke("data-update", newData);
     },
     commandExe: (
+        path: string,
         command: string
     ): Promise<{ success: boolean; output: string }> => {
         console.log("PRELOAD commandExe() CALLED.");
