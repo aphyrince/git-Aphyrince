@@ -4,5 +4,6 @@ A program that allows you to use git with a GUI
 
 
 
-!\[demo](./screenshot.png)
+![demo](./screenshot.png)
+
 
